@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if invoice_form.instance.pk %}
+        Edit Sales Invoice for {{ store.name }}
+    {% else %}
+        Add Sales Invoice for {{ store.name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% if invoice_form.instance.pk %}Edit{% else %}Add{% endif %} Sales Invoice for {{ store.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ invoice_form.as_p }}
+
+        {{ item_formset.management_form }}
+        <div id="formset-container">
+            {% for form in item_formset %}
+                <div class="form-row">
+                    {{ form.as_p }}
+                    <button type="button" class="delete-form btn btn-danger btn-sm">Delete</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-form" class="btn btn-primary">Add More Items</button>
+        <input type="submit" value="Save Invoice" class="btn btn-success">
+    </form>
+{% endblock %}

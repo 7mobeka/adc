@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ form.instance.id|yesno:"Edit Category,Create Category" }}</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+    <a href="{% url 'category_list' store_id=store_id %}" class="btn btn-secondary mt-3">Back to List</a>
+</div>
+{% endblock %}

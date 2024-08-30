@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Employees at {{ store.name }}</h1>
+
+    <a href="{% url 'employee_create' store_id=store.id %}" class="btn btn-primary mb-3">Add Employee</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Salary</th>
+                <th>Position</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for employee in employees %}
+            <tr>
+                <td>
+                    {% if employee.image %}
+                        <img src="{{ employee.image.url }}" alt="Employee Image" style="width: 50px; height: auto;">
+                    {% else %}
+                        No Image
+                    {% endif %}
+                </td>
+                <td>{{ employee.first_name }}</td>
+                <td>{{ employee.last_name }}</td>
+                <td>${{ employee.salary|floatformat:2 }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.phone_number }}</td>
+                <td>
+                    <a href="{% url 'employee_update' store_id=store.id pk=employee.id %}" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="{% url 'manage_salary' store_id=store.id employee_id=employee.id %}" class="btn btn-info btn-sm">Manage Salary</a>
+                    <form action="{% url 'employee_delete' store_id=store.id pk=employee.id %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this employee?');">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="8" class="text-center">No employees found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

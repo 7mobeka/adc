@@ -1,0 +1,56 @@
+<!-- profile.html -->
+{% extends 'base.html' %}
+
+{% block title %}Profile - {{ owner.username }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{{ owner.username }}'s Profile</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Profile Information</h5>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Name:</strong> {{ owner.username }}</li>
+                <li class="list-group-item"><strong>Email:</strong> {{ owner.email }}</li>
+                <li class="list-group-item"><strong>Mobile Number:</strong> {{ owner.phone_number }}</li>
+                <li class="list-group-item"><strong>Address:</strong> {{ owner.address }}</li>
+                {% if owner.type == 'owner' %}
+                <li class="list-group-item"><strong>Stores:</strong>
+                    {% if owner.stores.all %}
+                    <div class="row">
+                        {% for store in owner.stores.all %}
+                        <div class="col-md-4 mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if store.image %}
+                                    <img src="{{ store.image.url }}" alt="{{ store.name }} Image" class="img-thumbnail" style="max-width: 100px; margin-bottom: 10px;">
+                                    {% else %}
+                                    No image available
+                                    {% endif %}
+                                    <h5 class="card-title">
+                                        <a href="{% url 'store_detail' store.id %}">
+                                            {{ store.name }}
+                                        </a>
+                                    </h5>
+                                    <!-- Optionally display categories and items -->
+                                    <!-- Example: -->
+                                    <!-- <p class="card-text">{{ store.categories.count }} Categories</p> -->
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                    <p>No stores created yet.</p>
+                    {% endif %}
+                </li>
+                {% endif %}
+            </ul>
+            <hr>
+            {% if owner.type == 'owner' %}
+            <a href="{% url 'create_store' %}" class="btn btn-primary">Create Store</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

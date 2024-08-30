@@ -1,0 +1,31 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home - My Django Project{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Welcome to My Django Project</h2>
+            <p>This is the content of your home page.</p>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Latest News</h5>
+                    <p class="card-text">Stay updated with the latest news.</p>
+                    <a href="#" class="btn btn-primary">Read More</a>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h5 class="card-title">Upcoming Events</h5>
+                    <p class="card-text">Check out our upcoming events.</p>
+                    <a href="#" class="btn btn-primary">View Events</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

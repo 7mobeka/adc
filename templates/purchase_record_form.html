@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {% if transaction_form.instance.pk %}
+        Edit Purchase Record for {{ store.name }}
+    {% else %}
+        Add Purchase Record for {{ store.name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <h1>{% if transaction_form.instance.pk %}Edit{% else %}Add{% endif %} Purchase Record for {{ store.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ transaction_form.as_p }}
+
+        {{ product_formset.management_form }}
+        <div id="formset-container">
+            {% for form in product_formset %}
+                <div class="form-row">
+                    {{ form.as_p }}
+                    <button type="button" class="delete-form btn btn-danger btn-sm">Delete</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <button type="button" id="add-form" class="btn btn-primary">Add More Products</button>
+        <input type="submit" value="Save Transaction" class="btn btn-success">
+    </form>
+{% endblock %}

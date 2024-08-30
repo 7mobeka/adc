@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+
+{% block title %}Store Detail - {{ store.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h2>{{ store.name }}</h2>
+            <p><strong>Location:</strong> {{ store.address }}</p>
+            {% if store.image %}
+            <img src="{{ store.image.url }}" alt="{{ store.name }} Image" class="img-fluid rounded mb-3" style="max-width: 50%;">
+            {% else %}
+            <p>No image available</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Employees Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'employee_create' store_id=store.id %}" class="btn btn-success btn-block">Add Employee</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'employee_list' store_id=store.id %}" class="btn btn-info btn-block">View Employees</a>
+        </div>
+    </div>
+
+    <!-- Salary Changes Section -->
+    <div class="row mt-4">
+        <div class="col-md-12 mb-3">
+            <a href="{% url 'salary_changes_list' %}" class="btn btn-secondary btn-block">View All Salary Changes</a>
+        </div>
+    </div>
+
+    <!-- Categories Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'category_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Category</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'category_list' store_id=store.id %}" class="btn btn-info btn-block">View Categories</a>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'product_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Product</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'product_list' store_id=store.id %}" class="btn btn-info btn-block">View Products</a>
+        </div>
+    </div>
+
+    <!-- Suppliers Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'supplier_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Supplier</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'supplier_list' store_id=store.id %}" class="btn btn-info btn-block">View Suppliers</a>
+        </div>
+    </div>
+
+    <!-- Customers Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'customer_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Customer</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'customer_list' store_id=store.id %}" class="btn btn-info btn-block">View Customers</a>
+        </div>
+    </div>
+
+    <!-- Records Section -->
+    <div class="row mt-4">
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'record_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Record</a>
+        </div>
+        <div class="col-md-6 mb-3">
+            <a href="{% url 'record_list' store_id=store.id %}" class="btn btn-info btn-block">View Records</a>
+        </div>
+    </div>
+    <!-- Purchase Records Section -->
+    <div class="row mt-4">
+       <div class="col-md-6 mb-3">
+         <a href="{% url 'purchase_record_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Purchase Record</a>
+       </div>
+        <div class="col-md-6 mb-3">
+         <a href="{% url 'purchase_record_list' store_id=store.id %}" class="btn btn-info btn-block">View Purchase Records</a>
+        </div>
+    </div>
+    <!-- Sales Invoices Section -->
+    <div class="row mt-4">
+       <div class="col-md-6 mb-3">
+         <a href="{% url 'sales_invoice_create' store_id=store.id %}" class="btn btn-primary btn-block">Add Sales Invoice</a>
+       </div>
+       <div class="col-md-6 mb-3">
+         <a href="{% url 'sales_invoice_list' store_id=store.id %}" class="btn btn-info btn-block">View Sales Invoices</a>
+       </div>
+    </div>
+
+
+  
+</div>
+{% endblock %}

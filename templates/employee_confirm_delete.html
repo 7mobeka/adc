@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Confirm Delete Employee
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-4">
+        <h1>Confirm Delete Employee</h1>
+        <p>Are you sure you want to delete {{ employee.name }}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'employee_list' store_id=employee.store.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+{% endblock %}

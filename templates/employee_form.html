@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    {% if form.instance.pk %}
+        Edit Employee at {{ store.name }}
+    {% else %}
+        Add Employee to {{ store.name }}
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>
+        {% if form.instance.pk %}
+            Edit Employee at {{ store.name }}
+        {% else %}
+            Add Employee to {{ store.name }}
+        {% endif %}
+    </h1>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">
+                {% if form.instance.pk %}
+                    Save Changes
+                {% else %}
+                    Add Employee
+                {% endif %}
+            </button>
+            <a href="{% url 'employee_list' store_id=store_id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
